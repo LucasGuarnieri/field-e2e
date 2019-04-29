@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Login Page
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="loginForm">
+    <ion-item>
+      <ion-label position="fixed">E-mail</ion-label>
+      <ion-input type="email" name="email" formControlName="email"></ion-input>
+      
+      <div class="item-error" *ngIf="loginForm.controls['email'].errors  && loginForm.controls['email'].dirty">
+        <ion-label color="danger" class="error-label" *ngIf="loginForm.controls['email'].errors.required">email is required</ion-label>
+        <ion-label color="danger" class="error-label" *ngIf="loginForm.controls['email'].errors.email">email not valid</ion-label>
+      </div>
+    </ion-item>
+
+    
+    <ion-item>
+      <ion-label position="fixed">Password</ion-label>
+      <ion-input type="password" name="password" formControlName="password"></ion-input><br>
+
+      <div class="item-error" *ngIf="loginForm.controls['password'].errors && loginForm.controls['password'].dirty">
+        <ion-label color="danger" *ngIf="loginForm.controls['password'].errors.required">password is required</ion-label>
+        <ion-label color="danger" *ngIf="loginForm.controls['password'].errors.minlength">the password must be greater than {{loginForm.controls['password'].errors.minlength.requiredLength}} characters</ion-label>
+      </div>
+    </ion-item>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-button color="primary" size="full" [disabled]="!loginForm.valid" (click)="doLogin()" class="submit-form">Login</ion-button>
+</ion-footer>
